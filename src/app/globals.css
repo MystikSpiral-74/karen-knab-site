@@ -44,10 +44,23 @@ body {
 /* Spaced small caps label used across the brand board */
 .eyebrow {
   font-family: var(--font-serif);
-  font-size: 0.8rem;
-  letter-spacing: 0.28em;
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--slate);
+  color: var(--petrol);
+}
+
+@media (min-width: 640px) {
+  .eyebrow {
+    font-size: 1.3rem;
+  }
+}
+
+/* On dark sections: a lighter taupe so the label holds its weight against petrol and forest */
+.eyebrow-light {
+  color: #e4d9c9;
 }
 
 @media (prefers-reduced-motion: reduce) {

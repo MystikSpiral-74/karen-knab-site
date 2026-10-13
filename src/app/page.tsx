@@ -15,6 +15,7 @@ import { Header } from "@/components/Header";
 import { CtaButton } from "@/components/CtaButton";
 import { Monogram } from "@/components/Logo";
 import { HeroCopy } from "@/components/HeroCopy";
+import { GroupIcon } from "@/components/GroupIcons";
 
 function Portrait({
   src,
@@ -42,7 +43,7 @@ function Portrait({
 }
 
 function Eyebrow({ children, light = false }: { children: React.ReactNode; light?: boolean }) {
-  return <p className={`eyebrow ${light ? "!text-taupe" : ""}`}>{children}</p>;
+  return <p className={`eyebrow ${light ? "eyebrow-light" : ""}`}>{children}</p>;
 }
 
 function Rule({ light = false }: { light?: boolean }) {
@@ -104,7 +105,7 @@ export default function Home() {
               <p className="max-w-md font-serif text-2xl italic text-slate">{recognition.close}</p>
             </div>
             <div>
-              <p className="mb-4 text-sm uppercase tracking-[0.18em] text-sage">{recognition.intro}</p>
+              <p className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-slate">{recognition.intro}</p>
               <ul className="divide-y divide-taupe/40 border-y border-taupe/40">
                 {recognition.items.map((item) => (
                   <li key={item} className="py-4 text-lg leading-relaxed text-ink/90">
@@ -121,15 +122,16 @@ export default function Home() {
           <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
             <div className="max-w-3xl">
               <Eyebrow>{who.eyebrow}</Eyebrow>
-              <h2 className="mt-4 font-serif text-4xl font-medium leading-tight text-petrol sm:text-5xl">
+              <h2 className="mt-4 font-serif text-4xl font-medium text-balance leading-tight text-petrol sm:text-5xl">
                 {who.heading}
               </h2>
               <p className="mt-6 text-lg leading-relaxed text-ink/90">{who.body}</p>
             </div>
             <ul className="mt-12 grid gap-px bg-taupe/40 sm:grid-cols-2 lg:grid-cols-3">
-              {who.groups.map((g) => (
-                <li key={g} className="bg-linen p-6 font-serif text-xl text-petrol">
-                  {g}
+              {who.groups.map((g, i) => (
+                <li key={g} className="flex items-center gap-5 bg-linen p-6 font-serif text-xl leading-snug text-petrol">
+                  <GroupIcon index={i} />
+                  <span>{g}</span>
                 </li>
               ))}
             </ul>
