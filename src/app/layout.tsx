@@ -17,7 +17,9 @@ export const metadata: Metadata = {
     type: "website",
     url: site.url,
   },
-  robots: { index: true, follow: true },
+  robots: site.allowIndexing
+    ? { index: true, follow: true }
+    : { index: false, follow: false },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
