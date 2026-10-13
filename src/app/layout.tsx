@@ -1,0 +1,29 @@
+import type { Metadata } from "next";
+import "@fontsource/cormorant-garamond/400.css";
+import "@fontsource/cormorant-garamond/400-italic.css";
+import "@fontsource/cormorant-garamond/500.css";
+import "@fontsource/cormorant-garamond/600.css";
+import "@fontsource-variable/inter";
+import "./globals.css";
+import { site } from "@/content/copy";
+
+export const metadata: Metadata = {
+  metadataBase: new URL(site.url),
+  title: "Karen Knab, LMFT | Therapy for Leaders and High-Achieving Professionals",
+  description: site.metaDescription,
+  openGraph: {
+    title: "Karen Knab, LMFT",
+    description: site.metaDescription,
+    type: "website",
+    url: site.url,
+  },
+  robots: { index: true, follow: true },
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body className="min-h-screen flex flex-col">{children}</body>
+    </html>
+  );
+}

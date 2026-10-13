@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+/* Brand palette from Karen's brand board */
+:root {
+  --petrol: #0e3e4b;
+  --slate: #39606b;
+  --forest: #1b4336;
+  --sage: #5a6d68;
+  --taupe: #a89785;
+  --linen: #ede6dc;
+  --paper: #f7f3ec;
+  --ink: #12262c;
+}
+
+@theme inline {
+  --color-petrol: var(--petrol);
+  --color-slate: var(--slate);
+  --color-forest: var(--forest);
+  --color-sage: var(--sage);
+  --color-taupe: var(--taupe);
+  --color-linen: var(--linen);
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --font-serif: "Cormorant Garamond", "Cormorant", Georgia, serif;
+  --font-sans: "Inter Variable", system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 2px solid var(--slate);
+  outline-offset: 3px;
+}
+
+/* Spaced small caps label used across the brand board */
+.eyebrow {
+  font-family: var(--font-serif);
+  font-size: 0.8rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
