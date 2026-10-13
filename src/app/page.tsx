@@ -108,8 +108,22 @@ export default function Home() {
               <p className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-slate">{recognition.intro}</p>
               <ul className="divide-y divide-taupe/40 border-y border-taupe/40">
                 {recognition.items.map((item) => (
-                  <li key={item} className="py-4 text-lg leading-relaxed text-ink/90">
-                    {item}
+                  <li key={item} className="flex items-start gap-4 py-4 text-lg leading-relaxed text-ink/90">
+                    <svg
+                      aria-hidden="true"
+                      focusable="false"
+                      viewBox="0 0 24 24"
+                      className="mt-[0.4rem] h-6 w-6 shrink-0 text-petrol"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.75"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M4 12h15" />
+                      <path d="M13 6l6 6-6 6" />
+                    </svg>
+                    <span>{item}</span>
                   </li>
                 ))}
               </ul>
