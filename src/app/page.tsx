@@ -277,7 +277,7 @@ export default function Home() {
         {/* CLOSING CTA */}
         <section className="bg-petrol text-linen">
           <div className="mx-auto max-w-3xl px-5 py-20 text-center sm:px-8 md:py-28">
-            <Monogram className="text-6xl text-taupe" />
+            <Monogram className="text-7xl text-taupe" />
             <h2 className="mt-6 font-serif text-4xl font-medium leading-tight sm:text-5xl">
               {closing.heading}
             </h2>
