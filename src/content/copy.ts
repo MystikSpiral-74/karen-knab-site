@@ -1,14 +1,29 @@
 // All page copy lives here so Karen's edits never touch layout code.
 // Style rule: no em-dashes anywhere in site copy.
 
+// Env vars set to an empty or malformed value must not crash the build, so
+// anything that is not a valid http(s) URL falls back to the default.
+function urlFromEnv(value: string | undefined, fallback: string): string {
+  const v = value?.trim();
+  if (!v) return fallback;
+  try {
+    const u = new URL(v);
+    return u.protocol === "http:" || u.protocol === "https:" ? v : fallback;
+  } catch {
+    return fallback;
+  }
+}
+
 export const site = {
   name: "Karen Knab, LMFT",
   descriptor: "Therapy for Leaders and High-Achieving Professionals",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.karenknab.com",
+  url: urlFromEnv(process.env.NEXT_PUBLIC_SITE_URL, "https://www.karenknab.com"),
   email: "karen@karenknab.com",
   // Replace with Karen's real Calendly link (set NEXT_PUBLIC_CALENDLY_URL in Vercel).
-  bookingUrl:
-    process.env.NEXT_PUBLIC_CALENDLY_URL ?? "https://calendly.com/REPLACE-WITH-KAREN",
+  bookingUrl: urlFromEnv(
+    process.env.NEXT_PUBLIC_CALENDLY_URL,
+    "https://calendly.com/REPLACE-WITH-KAREN",
+  ),
   ctaLabel: "Schedule a free consultation",
   ctaNote: "Free, 45 minutes. No pressure, no pitch.",
   metaDescription:
