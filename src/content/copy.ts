@@ -39,6 +39,8 @@ export const site = {
   // Draft sites stay hidden from search engines. Set NEXT_PUBLIC_ALLOW_INDEXING=true at launch.
   allowIndexing: process.env.NEXT_PUBLIC_ALLOW_INDEXING === "true",
   ctaLabel: "Schedule a free introductory call",
+  // Short label for the header button. It has to stay short to fit beside the logo on phones.
+  headerCtaLabel: "Let's talk",
   ctaNote: "Free, 20 minutes. No pressure, no pitch.",
   metaDescription:
     "Private therapy for founders, executives, attorneys, finance professionals and physicians who look highly functional from the outside and are privately burning out. Secure telehealth in Virginia and New York.",
