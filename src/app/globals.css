@@ -63,6 +63,30 @@ body {
   color: #e4d9c9;
 }
 
+/* Paper grain for section bands (same technique as wantmoretherapy.com).
+   Add the "grain-band" class to a section or footer. The noise sits behind the content
+   and above the band's background color, and blends with it, so it works on any palette color. */
+:root {
+  --grain-opacity: 0.8;
+}
+
+.grain-band {
+  isolation: isolate;
+  position: relative;
+}
+
+.grain-band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: var(--grain-opacity);
+  mix-blend-mode: overlay;
+  background-size: 200px 200px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0 0 0 0 1'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='0.6' intercept='0.2'/%3E%3CfeFuncG type='linear' slope='0.6' intercept='0.2'/%3E%3CfeFuncB type='linear' slope='0.6' intercept='0.2'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
