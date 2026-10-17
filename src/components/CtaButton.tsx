@@ -7,7 +7,7 @@ type Props = {
 };
 
 const styles = {
-  solid: "bg-petrol text-linen hover:bg-forest border border-petrol hover:border-forest",
+  solid: "bg-petrol text-linen hover:bg-slate border border-petrol hover:border-slate",
   outline: "border border-linen/70 text-linen hover:bg-linen hover:text-petrol",
   light: "bg-linen text-petrol hover:bg-paper border border-linen",
 };

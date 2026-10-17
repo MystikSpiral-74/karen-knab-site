@@ -2,7 +2,7 @@
 
 import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import { heroOptions } from "@/content/copy";
+import { heroOptions, defaultHeroIndex } from "@/content/copy";
 
 function Copy({ index }: { index: number }) {
   const hero = heroOptions[index];
@@ -19,17 +19,19 @@ function Copy({ index }: { index: number }) {
   );
 }
 
-// Review aid: /?h=1, /?h=2 or /?h=3 swaps the headline. Defaults to option 1.
+// /?h=1, /?h=2 or /?h=3 swaps the headline. With no (or an invalid) value the default applies.
 function Switcher() {
   const params = useSearchParams();
-  const n = parseInt(params.get("h") ?? "1", 10);
-  const index = Math.min(Math.max(Number.isNaN(n) ? 1 : n, 1), heroOptions.length) - 1;
+  const n = parseInt(params.get("h") ?? "", 10);
+  const index = Number.isNaN(n)
+    ? defaultHeroIndex
+    : Math.min(Math.max(n, 1), heroOptions.length) - 1;
   return <Copy index={index} />;
 }
 
 export function HeroCopy() {
   return (
-    <Suspense fallback={<Copy index={0} />}>
+    <Suspense fallback={<Copy index={defaultHeroIndex} />}>
       <Switcher />
     </Suspense>
   );

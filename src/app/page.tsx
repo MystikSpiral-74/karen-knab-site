@@ -57,6 +57,7 @@ const jsonLd = {
   description: site.metaDescription,
   url: site.url,
   email: site.email,
+  sameAs: [site.linkedinUrl],
   areaServed: [
     { "@type": "AdministrativeArea", name: "Virginia" },
     { "@type": "AdministrativeArea", name: "New York" },
@@ -95,16 +96,14 @@ export default function Home() {
 
         {/* RECOGNITION */}
         <section className="bg-paper">
-          <div className="mx-auto grid max-w-6xl gap-12 px-5 py-20 sm:px-8 md:py-28 lg:grid-cols-[0.9fr_1.1fr]">
-            <div>
+          <div className="mx-auto grid max-w-6xl gap-12 px-5 py-20 sm:px-8 md:py-28 lg:grid-cols-[0.9fr_1.1fr] lg:grid-rows-[auto_1fr] lg:gap-y-0">
+            <div className="lg:col-start-1 lg:row-start-1">
               <Eyebrow>{recognition.eyebrow}</Eyebrow>
               <h2 className="mt-4 font-serif text-4xl font-medium leading-tight text-petrol sm:text-5xl">
                 {recognition.heading}
               </h2>
-              <Rule />
-              <p className="max-w-md font-serif text-2xl italic text-slate">{recognition.close}</p>
             </div>
-            <div>
+            <div className="lg:col-start-2 lg:row-span-2 lg:row-start-1">
               <p className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-slate">{recognition.intro}</p>
               <ul className="divide-y divide-taupe/40 border-y border-taupe/40">
                 {recognition.items.map((item) => (
@@ -128,6 +127,14 @@ export default function Home() {
                 ))}
               </ul>
             </div>
+            <div className="lg:col-start-1 lg:row-start-2">
+              <Rule />
+              <p className="max-w-md font-serif text-2xl italic text-slate">{recognition.close}</p>
+              <p className="mt-10 max-w-md text-base leading-relaxed text-ink/80">
+                <span className="font-semibold text-petrol">{recognition.concernsLabel}: </span>
+                {recognition.concerns}
+              </p>
+            </div>
           </div>
         </section>
 
@@ -149,15 +156,11 @@ export default function Home() {
                 </li>
               ))}
             </ul>
-            <p className="mt-10 max-w-3xl text-base leading-relaxed text-ink/80">
-              <span className="font-semibold text-petrol">{who.concernsLabel}: </span>
-              {who.concerns}
-            </p>
           </div>
         </section>
 
         {/* APPROACH */}
-        <section id="approach" className="scroll-mt-20 bg-forest text-linen">
+        <section id="approach" className="scroll-mt-20 bg-slate text-linen">
           <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 md:py-28">
             <div className="grid gap-10 lg:grid-cols-2">
               <div>
@@ -166,7 +169,7 @@ export default function Home() {
                   {approach.heading}
                 </h2>
               </div>
-              <div className="space-y-5 text-lg leading-relaxed text-linen/90">
+              <div className="space-y-5 text-lg leading-relaxed text-linen">
                 {approach.body.map((p) => (
                   <p key={p}>{p}</p>
                 ))}
@@ -174,9 +177,9 @@ export default function Home() {
             </div>
             <div className="mt-14 grid gap-px bg-linen/20 sm:grid-cols-2 lg:grid-cols-4">
               {approach.pillars.map((p) => (
-                <div key={p.title} className="bg-forest p-6">
+                <div key={p.title} className="bg-slate p-6">
                   <h3 className="font-serif text-2xl text-linen">{p.title}</h3>
-                  <p className="mt-3 text-base leading-relaxed text-linen/80">{p.text}</p>
+                  <p className="mt-3 text-base leading-relaxed text-linen/95">{p.text}</p>
                 </div>
               ))}
             </div>
@@ -295,7 +298,11 @@ export default function Home() {
           <div className="mx-auto max-w-3xl px-5 py-20 text-center sm:px-8 md:py-28">
             <Monogram className="text-7xl text-taupe" />
             <h2 className="mt-6 font-serif text-4xl font-medium leading-tight sm:text-5xl">
-              {closing.heading}
+              {closing.headingLines.map((line) => (
+                <span key={line} className="block">
+                  {line}
+                </span>
+              ))}
             </h2>
             <p className="mx-auto mt-6 max-w-xl font-serif text-xl italic text-linen/85">
               {closing.body}
@@ -312,12 +319,41 @@ export default function Home() {
         <div className="mx-auto max-w-6xl space-y-4 px-5 py-12 text-sm leading-relaxed sm:px-8">
           <p className="font-serif text-lg uppercase tracking-[0.18em] text-linen">{site.name}</p>
           <p>{footer.licensure}</p>
-          <p>
-            <a className="underline underline-offset-4 hover:text-linen" href={`mailto:${site.email}`}>
+          <ul className="space-y-1">
+            {footer.licenses.map((l) => (
+              <li key={l.label}>
+                {l.label}.{" "}
+                <a
+                  className="underline underline-offset-4 hover:text-linen focus-visible:outline-linen"
+                  href={l.verifyHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${footer.verifyLabel} ${l.label} (opens in a new tab)`}
+                >
+                  {footer.verifyLabel}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <div className="flex items-center gap-5">
+            <a
+              className="underline underline-offset-4 hover:text-linen focus-visible:outline-linen"
+              href={`mailto:${site.email}`}
+            >
               {site.email}
             </a>
-          </p>
-          <p className="max-w-3xl">{footer.note}</p>
+            <a
+              href={site.linkedinUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Karen Knab on LinkedIn (opens in a new tab)"
+              className="inline-flex text-linen/80 hover:text-linen focus-visible:outline-linen"
+            >
+              <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+              </svg>
+            </a>
+          </div>
           <p className="max-w-3xl">{footer.crisis}</p>
           <p className="pt-4 text-xs text-linen/50">
             &copy; 2026 {site.name}. All rights reserved.

@@ -30,20 +30,23 @@ export const site = {
     ),
   ),
   email: "karen@karenknab.com",
-  // Replace with Karen's real Calendly link (set NEXT_PUBLIC_CALENDLY_URL in Vercel).
+  // Karen's free 20-minute introductory call. NEXT_PUBLIC_CALENDLY_URL in Vercel overrides it.
   bookingUrl: urlFromEnv(
     process.env.NEXT_PUBLIC_CALENDLY_URL,
-    "https://calendly.com/REPLACE-WITH-KAREN",
+    "https://calendly.com/karenknab/introductory-call",
   ),
+  linkedinUrl: "https://www.linkedin.com/in/karen-knab",
   // Draft sites stay hidden from search engines. Set NEXT_PUBLIC_ALLOW_INDEXING=true at launch.
   allowIndexing: process.env.NEXT_PUBLIC_ALLOW_INDEXING === "true",
-  ctaLabel: "Schedule a free consultation",
-  ctaNote: "Free, 45 minutes. No pressure, no pitch.",
+  ctaLabel: "Schedule a free introductory call",
+  ctaNote: "Free, 20 minutes. No pressure, no pitch.",
   metaDescription:
     "Private therapy for founders, executives, attorneys, finance professionals and physicians who look highly functional from the outside and are privately burning out. Secure telehealth in Virginia and New York.",
 };
 
-// Three hero options for Karen to react to. Preview with /?h=1, /?h=2, /?h=3.
+// Hero headline options. With no ?h= in the URL the page shows option 3 (defaultHeroIndex).
+// The others stay reachable for sharing: /?h=1, /?h=2, /?h=3 (positions in this list).
+export const defaultHeroIndex = 2;
 export const heroOptions = [
   {
     headline: "You're the one everyone relies on. Who do you rely on?",
@@ -83,11 +86,14 @@ export const recognition = {
     "Traditional mental-health messaging doesn't sound like it was written for you.",
   ],
   close: "You've built something. It's costing more than you expected.",
+  concernsLabel: "Common concerns",
+  concerns:
+    "Burnout, strain in a marriage or partnership, work-life balance, family conflict that spills into the business, and habits used to cope with pressure.",
 };
 
 export const who = {
   eyebrow: "Who I work with",
-  heading: "You don't need a C-suite title for this to fit.",
+  heading: "Your title doesn't decide whether this fits.",
   body: "Attorneys, finance professionals and physicians carry the same weight as executives: long hours, high stakes and a role you can't set down at the end of the day. The patterns are the same, and so is the cost.",
   groups: [
     "Founders, business owners and executives",
@@ -97,9 +103,6 @@ export const who = {
     "Members of family-owned businesses",
     "Other high-achieving professionals in demanding careers",
   ],
-  concernsLabel: "Common concerns",
-  concerns:
-    "Burnout, strain in a marriage or partnership, work-life balance, family conflict that spills into the business, and habits used to cope with pressure.",
 };
 
 export const approach = {
@@ -133,7 +136,7 @@ export const method = {
   eyebrow: "How I work",
   heading: "How I think about this.",
   body: [
-    "I work from a family systems perspective: the idea that none of us is who we are in isolation. Your marriage, your family, your firm and the role you play in each of them are one connected system, and change in one part moves the others.",
+    "I work from a family systems perspective: the idea that none of us is who we are in isolation. Your marriage, your family, your organization and the role you play in each of them are one connected system, and change in one part moves the others.",
     "I'm direct, and I'm kind about it. My East Coast candor and Midwest tact tend to land well with people who are tired of being handled. You won't get a framework or a worksheet. You'll get a real conversation, tailored to you.",
     "The goal isn't to make life easier. It's to change your relationship with the pressure, so that you respond to it instead of just absorbing it.",
   ],
@@ -158,7 +161,7 @@ export const how = {
   heading: "A straightforward way to begin.",
   steps: [
     {
-      title: "A free 45-minute consultation",
+      title: "A free 20-minute introductory call",
       text: "We talk about what's going on, what you want to change, and whether working together makes sense. No pressure, no pitch.",
     },
     {
@@ -185,6 +188,7 @@ export const about = {
     "Licensed Marriage and Family Therapist",
     "20 years of clinical experience",
     "5 years coaching founders and CEOs",
+    "Has worked with leaders and organizations in Virginia/Washington DC, Los Angeles, Austin, Minneapolis, and Buffalo NY",
     "Secure telehealth in Virginia and New York",
   ],
 };
@@ -199,7 +203,7 @@ export const faq = {
     },
     {
       q: "Where do you see clients?",
-      a: "By secure, private telehealth for clients located in Virginia or New York.",
+      a: "By secure, private telehealth, for clients located in Virginia or New York at the time of the session.",
     },
     {
       q: "Is what we discuss confidential?",
@@ -207,11 +211,11 @@ export const faq = {
     },
     {
       q: "Do you take insurance?",
-      a: "My practice is private-pay. If you have questions about fees or how this fits your situation, we can talk about it in the consultation.",
+      a: "My practice is private-pay. If you have questions about fees or how this fits your situation, we can talk about it on the introductory call.",
     },
     {
       q: "I'm not sure I need therapy. Is that okay?",
-      a: "Very common. Most people who reach out are functioning well on the surface and aren't sure it's \"bad enough.\" The consultation is a low-pressure way to find out whether this is the right fit.",
+      a: "Very common. Most people who reach out are functioning well on the surface and aren't sure it's \"bad enough.\" The introductory call is a low-pressure way to find out whether this is the right fit.",
     },
     {
       q: "I don't hold a C-suite title. Is this still for me?",
@@ -221,13 +225,25 @@ export const faq = {
 };
 
 export const closing = {
-  heading: "The first conversation is just that. A conversation.",
+  // Two lines on purpose, so "A conversation." sits together on the second line.
+  headingLines: ["The first conversation is just that.", "A conversation."],
   body: "An honest discussion about where you are, where you want to be, and whether working together makes sense.",
 };
 
 export const footer = {
   licensure: "Karen Knab, LMFT. Licensed in Virginia and New York.",
+  // Each license links to that state's public verification tool.
+  licenses: [
+    {
+      label: "Virginia LMFT license 0717002740",
+      verifyHref: "https://dhp.virginiainteractive.org/lookup/index",
+    },
+    {
+      label: "New York LMFT license 001354",
+      verifyHref: "https://eservices.nysed.gov/professions/verification-search",
+    },
+  ],
+  verifyLabel: "Verify",
   crisis:
-    "If you are in crisis or need immediate help, call or text 988, or go to your nearest emergency room. Scheduling a consultation is not an emergency service.",
-  note: "Telehealth services are available only to clients located in Virginia or New York at the time of the session.",
+    "If you are in crisis or need immediate help, call or text 988, or go to your nearest emergency room. Scheduling an introductory call is not an emergency service.",
 };
