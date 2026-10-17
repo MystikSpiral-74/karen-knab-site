@@ -5,7 +5,7 @@ import { CtaButton } from "./CtaButton";
 export function Header() {
   return (
     <header className="sticky top-0 z-30 bg-petrol/95 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-5 py-4 sm:px-8">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-4 sm:gap-6 sm:px-8">
         <Logo />
         <nav aria-label="Primary" className="hidden items-center gap-7 xl:flex">
           {nav.map((item) => (
@@ -18,7 +18,7 @@ export function Header() {
             </a>
           ))}
         </nav>
-        <CtaButton label="Connect" variant="outline" className="!px-5 !py-2.5 !text-xs" />
+        <CtaButton label="Connect" variant="outline" className="!gap-2 !px-4 !py-2.5 !text-xs !tracking-[0.14em] max-sm:[&>span]:hidden sm:!gap-3 sm:!px-5 sm:!tracking-[0.2em]" />
       </div>
     </header>
   );

@@ -19,14 +19,14 @@ export function Logo({ tone = "light" }: { tone?: "light" | "dark" }) {
   const color = tone === "light" ? "text-linen" : "text-petrol";
   const sub = tone === "light" ? "text-taupe" : "text-slate";
   return (
-    <a href="#top" className={`flex items-center gap-4 whitespace-nowrap ${color}`} aria-label="Karen Knab, LMFT, home">
-      <Monogram className="text-6xl" />
+    <a href="#top" className={`flex items-center gap-3 whitespace-nowrap sm:gap-4 ${color}`} aria-label="Karen Knab, LMFT, home">
+      <Monogram className="text-4xl sm:text-6xl" />
       <span className="hidden h-8 w-px bg-taupe/60 sm:block" aria-hidden="true" />
-      <span className="flex flex-col">
-        <span className="font-serif text-lg uppercase tracking-[0.18em] sm:text-xl">
+      <span className="flex flex-col max-[359px]:hidden">
+        <span className="font-serif text-sm uppercase tracking-[0.12em] sm:text-xl sm:tracking-[0.18em]">
           Karen Knab, LMFT
         </span>
-        <span className={`font-serif text-[0.62rem] uppercase tracking-[0.3em] ${sub}`}>
+        <span className={`hidden font-serif text-[0.62rem] uppercase tracking-[0.3em] sm:block ${sub}`}>
           Therapy for Leaders
         </span>
       </span>
