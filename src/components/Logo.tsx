@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { MONOGRAM_PATH, MONOGRAM_VIEWBOX } from "./monogramPath";
 
 export function Monogram({ className = "" }: { className?: string }) {
@@ -19,7 +20,7 @@ export function Logo({ tone = "light" }: { tone?: "light" | "dark" }) {
   const color = tone === "light" ? "text-linen" : "text-petrol";
   const sub = tone === "light" ? "text-taupe" : "text-slate";
   return (
-    <a href="#top" className={`flex items-center gap-3 whitespace-nowrap sm:gap-4 ${color}`} aria-label="Karen Knab, LMFT, home">
+    <Link href="/" className={`flex items-center gap-3 whitespace-nowrap sm:gap-4 ${color}`} aria-label="Karen Knab, LMFT, home">
       <Monogram className="text-4xl sm:text-6xl" />
       <span className="hidden h-8 w-px bg-taupe/60 sm:block" aria-hidden="true" />
       <span className="flex flex-col max-[359px]:hidden">
@@ -30,6 +31,6 @@ export function Logo({ tone = "light" }: { tone?: "light" | "dark" }) {
           Therapy for Leaders
         </span>
       </span>
-    </a>
+    </Link>
   );
 }

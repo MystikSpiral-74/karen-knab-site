@@ -1,27 +1,32 @@
+import Link from "next/link";
 import { site } from "@/content/copy";
+import { ctaBase, ctaStyles } from "./ctaStyles";
 
 type Props = {
   label?: string;
-  variant?: "solid" | "outline" | "light";
+  variant?: keyof typeof ctaStyles;
   className?: string;
 };
 
-const styles = {
-  solid: "bg-petrol text-linen hover:bg-slate border border-petrol hover:border-slate",
-  outline: "border border-linen/70 text-linen hover:bg-linen hover:text-petrol",
-  light: "bg-linen text-petrol hover:bg-paper border border-linen",
-};
-
 export function CtaButton({ label = site.ctaLabel, variant = "solid", className = "" }: Props) {
-  return (
-    <a
-      href={site.bookingUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={`inline-flex items-center justify-center gap-3 px-7 py-3.5 font-serif text-sm font-semibold uppercase tracking-[0.2em] transition-colors ${styles[variant]} ${className}`}
-    >
+  const cls = `${ctaBase} ${ctaStyles[variant]} ${className}`;
+  const inner = (
+    <>
       {label}
       <span aria-hidden="true">&rarr;</span>
-    </a>
+    </>
+  );
+  // Form mode stays on the site. Calendly mode opens the booking page in a new tab.
+  if (site.ctaExternal) {
+    return (
+      <a href={site.ctaHref} target="_blank" rel="noopener noreferrer" className={cls}>
+        {inner}
+      </a>
+    );
+  }
+  return (
+    <Link href={site.ctaHref} className={cls}>
+      {inner}
+    </Link>
   );
 }

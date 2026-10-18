@@ -43,6 +43,17 @@ npm run build    # static build check
 - Confirm the "private-pay keeps care out of insurance" and "confidential within legal limits" FAQ wording.
 - Privacy policy page still needed. No analytics or ad pixels are installed.
 
+## Contact form and booking mode
+
+Every "request a call" button goes to `/contact`, a form (name, email, short note) that emails Karen. Karen replies with a booking link.
+
+- Transport: a Vercel Server Action posts to a Google Apps Script web app in Karen's Google account, which emails her. Nothing is stored. Script and steps: `docs/contact-form-apps-script.gs` and `docs/contact-form-setup.md`.
+- Vercel env vars: `CONTACT_WEBHOOK_URL` (the Apps Script /exec URL) and `CONTACT_WEBHOOK_SECRET` (matches the script's `SHARED_SECRET`). Without them the form shows an error with Karen's email.
+- Spam defenses: honeypot field, minimum time on page, validation, in-memory rate limits (per IP and global). They reset when the server restarts.
+- Switch back to Calendly: set `NEXT_PUBLIC_BOOKING_MODE=calendly` and redeploy. All Calendly code and `NEXT_PUBLIC_CALENDLY_URL` handling are kept.
+- Swapping email vendors later (for example Resend) only means changing `src/lib/inquiry.ts`.
+- `/privacy` is drafted from how the site actually works. Karen should review it (state boards, HIPAA status) and confirm the "two business days" promise and how long she keeps inquiry emails. Copy lives in `src/content/copy.ts` (`contact`, `privacy`, `replyWindow`).
+
 ## Deploy
 Push to GitHub (Vercel deploys automatically), then attach karenknab.com. `NEXT_PUBLIC_SITE_URL` and `NEXT_PUBLIC_CALENDLY_URL` are optional overrides.
 

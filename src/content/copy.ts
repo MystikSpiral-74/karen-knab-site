@@ -14,6 +14,23 @@ function urlFromEnv(value: string | undefined, fallback: string): string {
   }
 }
 
+// How the "request a call" buttons work.
+//   "form"     sends visitors to the /contact page (the default).
+//   "calendly" goes straight to Karen's Calendly page, as the site did before.
+// Set NEXT_PUBLIC_BOOKING_MODE=calendly in Vercel and redeploy to switch back.
+const bookingMode: "form" | "calendly" =
+  process.env.NEXT_PUBLIC_BOOKING_MODE === "calendly" ? "calendly" : "form";
+const byMode = <T>(form: T, calendly: T): T => (bookingMode === "calendly" ? calendly : form);
+
+// Karen's free 20-minute introductory call. NEXT_PUBLIC_CALENDLY_URL in Vercel overrides it.
+const bookingUrl = urlFromEnv(
+  process.env.NEXT_PUBLIC_CALENDLY_URL,
+  "https://calendly.com/karenknab/introductory-call",
+);
+
+// How quickly Karen promises to answer a note. Used in several places, so change it here.
+const replyWindow = "two business days";
+
 export const site = {
   name: "Karen Knab, LMFT",
   descriptor: "Therapy for Leaders and High-Achieving Professionals",
@@ -30,15 +47,16 @@ export const site = {
     ),
   ),
   email: "karen@karenknab.com",
-  // Karen's free 20-minute introductory call. NEXT_PUBLIC_CALENDLY_URL in Vercel overrides it.
-  bookingUrl: urlFromEnv(
-    process.env.NEXT_PUBLIC_CALENDLY_URL,
-    "https://calendly.com/karenknab/introductory-call",
-  ),
+  bookingMode,
+  bookingUrl,
+  replyWindow,
+  // Where every "request a call" button points, and whether it leaves the site.
+  ctaHref: bookingMode === "calendly" ? bookingUrl : "/contact",
+  ctaExternal: bookingMode === "calendly",
   linkedinUrl: "https://www.linkedin.com/in/karen-knab",
   // Draft sites stay hidden from search engines. Set NEXT_PUBLIC_ALLOW_INDEXING=true at launch.
   allowIndexing: process.env.NEXT_PUBLIC_ALLOW_INDEXING === "true",
-  ctaLabel: "Schedule a free introductory call",
+  ctaLabel: byMode("Request a free introductory call", "Schedule a free introductory call"),
   // Short label for the header button. It has to stay short to fit beside the logo on phones.
   headerCtaLabel: "Let's talk",
   ctaNote: "Free, 20 minutes. No pressure, no pitch.",
@@ -68,11 +86,11 @@ export const heroOptions = [
 ];
 
 export const nav = [
-  { label: "Who I work with", href: "#who" },
-  { label: "How I work", href: "#method" },
-  { label: "Getting started", href: "#how" },
-  { label: "About", href: "#about" },
-  { label: "FAQ", href: "#faq" },
+  { label: "Who I work with", href: "/#who" },
+  { label: "How I work", href: "/#method" },
+  { label: "Getting started", href: "/#how" },
+  { label: "About", href: "/#about" },
+  { label: "FAQ", href: "/#faq" },
 ];
 
 export const recognition = {
@@ -164,7 +182,10 @@ export const how = {
   steps: [
     {
       title: "A free 20-minute introductory call",
-      text: "We talk about what's going on, what you want to change, and whether working together makes sense. No pressure, no pitch.",
+      text: byMode(
+        `Send a short note and Karen will reply within ${replyWindow} to set up a time. We talk about what's going on, what you want to change, and whether working together makes sense. No pressure, no pitch.`,
+        "We talk about what's going on, what you want to change, and whether working together makes sense. No pressure, no pitch.",
+      ),
     },
     {
       title: "We get to what's underneath",
@@ -199,6 +220,13 @@ export const faq = {
   eyebrow: "Questions",
   heading: "Before you reach out.",
   items: [
+    {
+      q: "What happens after I reach out?",
+      a: byMode(
+        `Karen reads your note herself and replies within ${replyWindow}. If it looks like a good fit, she'll send a link to book a free 20-minute introductory call.`,
+        "You pick a time on Karen's calendar for a free 20-minute introductory call. It's a chance to talk about what's going on and whether working together makes sense.",
+      ),
+    },
     {
       q: "Is this therapy or coaching?",
       a: "It's therapy. My coaching background informs how I understand your world, but the work we do together is psychotherapy.",
@@ -246,6 +274,89 @@ export const footer = {
     },
   ],
   verifyLabel: "Verify",
-  crisis:
+  crisis: byMode(
+    "If you are in crisis or need immediate help, call or text 988, or go to your nearest emergency room. Requesting an introductory call is not an emergency service.",
     "If you are in crisis or need immediate help, call or text 988, or go to your nearest emergency room. Scheduling an introductory call is not an emergency service.",
+  ),
+  links: [
+    { label: "Contact", href: "/contact" },
+    { label: "Privacy policy", href: "/privacy" },
+  ],
+};
+
+export const contact = {
+  metaTitle: "Contact | Karen Knab, LMFT",
+  metaDescription:
+    "Send Karen Knab a short note to request a free introductory call. She replies personally within two business days.",
+  eyebrow: "Let's talk",
+  heading: "Request a free introductory call",
+  intro: `Tell Karen a little about what brings you here. She reads every note herself and will reply within ${replyWindow} to set up a free 20-minute conversation. No pressure, no pitch.`,
+  privacyNote:
+    "Please keep your note brief and leave out medical or other personal details. This form is not a secure place for clinical information. Your name and email are used only so Karen can reply.",
+  privacyLinkLabel: "How your information is handled",
+  fields: {
+    name: { label: "Your name", error: "Please enter your name." },
+    email: { label: "Your email", error: "Please enter a valid email address." },
+    reason: {
+      label: "What brings you here?",
+      hint: "A sentence or two is plenty.",
+      error: "Please add a short note (at least a few words).",
+    },
+  },
+  submit: "Send to Karen",
+  sending: "Sending...",
+  successHeading: "Thank you. Your note is on its way.",
+  successBody: `Karen will reply within ${replyWindow}. If you don't see a message from her, check your spam folder.`,
+  errorGeneric: `Something went wrong and your note didn't go through. Please try again, or email ${site.email} directly.`,
+  errorTooFast: "That was quick. Please take a moment and try sending again.",
+  errorRateLimit: `Too many attempts. Please try again later, or email ${site.email} directly.`,
+  crisis:
+    "If you are in crisis or need immediate help, call or text 988, or go to your nearest emergency room.",
+};
+
+export const privacy = {
+  metaTitle: "Privacy Policy | Karen Knab, LMFT",
+  metaDescription: "How Karen Knab, LMFT handles the information you send through this website.",
+  heading: "Privacy policy",
+  updated: "October 2026",
+  sections: [
+    {
+      heading: "What I collect",
+      body: [
+        "If you use the contact form, I receive your name, your email address, and the note you write. That is all. This site has no accounts, no analytics, no advertising trackers, and no tracking cookies.",
+      ],
+    },
+    {
+      heading: "How it is used",
+      body: [
+        "I use what you send only to reply to you and to establish a professional relationship with you. I do not sell it, rent it, or share it with anyone else, and I do not use it for marketing or advertising.",
+      ],
+    },
+    {
+      heading: "How it travels and where it lives",
+      body: [
+        "Your note is sent from this website to my email through Google's email systems. This site does not store form submissions in a database. A copy of your message stays in my email inbox, like any other email, until I delete it. The site is hosted on Vercel, which processes basic technical data such as IP addresses to deliver pages and protect against abuse.",
+      ],
+    },
+    {
+      heading: "Please keep it brief",
+      body: [
+        "Email and web forms are not secure places for private health information. Please do not include medical or other sensitive details in your note. We can talk about those once we are in touch through appropriate channels.",
+      ],
+    },
+    {
+      heading: "Deleting your message",
+      body: [`To have your message deleted, email ${site.email} and I will remove it.`],
+    },
+    {
+      heading: "Other sites",
+      body: [
+        "This site links to outside pages, such as LinkedIn and state license verification tools. Those sites have their own privacy practices.",
+      ],
+    },
+    {
+      heading: "Questions",
+      body: [`Write to ${site.email}.`],
+    },
+  ],
 };

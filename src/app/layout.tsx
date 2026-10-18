@@ -11,7 +11,6 @@ export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: "Karen Knab, LMFT | Therapy for Leaders and High-Achieving Professionals",
   description: site.metaDescription,
-  alternates: { canonical: "/" },
   openGraph: {
     title: "Karen Knab, LMFT",
     description: site.metaDescription,
