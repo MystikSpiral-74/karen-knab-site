@@ -116,7 +116,7 @@ export const recognition = {
 export const who = {
   eyebrow: "Who I work with",
   heading: "Your title doesn't decide whether this fits.",
-  body: "Much like leaders and founders, attorneys, finance professionals and physicians carry the same weight: long hours, high stakes and a role you can't set down at the end of the day. The patterns are the same, and so is the cost.",
+  body: "Attorneys, finance professionals and physicians carry the same weight as leaders and founders: long hours, high stakes and a role you can't set down at the end of the day. The patterns are the same, and so is the cost.",
   groups: [
     "Founders, business owners and executives",
     "Attorneys and law firm partners",

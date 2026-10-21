@@ -254,15 +254,10 @@ export default function Home() {
                       aria-hidden="true"
                       focusable="false"
                       viewBox="0 0 24 24"
-                      className="mt-[0.45rem] h-4 w-4 shrink-0 text-slate"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+                      className="mt-[0.62rem] h-[11px] w-[11px] shrink-0 text-taupe"
+                      fill="currentColor"
                     >
-                      <path d="M4 12h15" />
-                      <path d="M13 6l6 6-6 6" />
+                      <path d="M12 1l11 11-11 11L1 12z" />
                     </svg>
                     <span>{f}</span>
                   </li>
