@@ -243,8 +243,8 @@ export default function Home() {
           <div className="mx-auto grid max-w-6xl gap-12 px-5 py-20 sm:px-8 md:py-28 lg:grid-cols-[0.8fr_1.2fr]">
             <div>
               <Portrait
-                src="/images/karen-about.jpg"
-                alt="Karen Knab seated on a bench, smiling and looking off to the side"
+                src="/images/karen-rail.jpg"
+                alt="Karen Knab smiling, leaning on a railing in front of a bright orange and white glass wall"
                 className="aspect-[4/5] w-full"
               />
               <ul className="mt-6 space-y-2 border-t border-taupe/50 pt-5 font-serif text-lg text-petrol">

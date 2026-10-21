@@ -69,21 +69,22 @@ export const site = {
 // Hero headline options. With no ?h= in the URL the page shows option 3 (defaultHeroIndex).
 // The others stay reachable for sharing: /?h=1, /?h=2, /?h=3 (positions in this list).
 export const defaultHeroIndex = 2;
+
+// All three hero options share the same italic line under the headline.
+const heroSubhead =
+  "Private therapy for founders, executives, attorneys, finance professionals and physicians who look highly functional from the outside and are quietly burning out.";
 export const heroOptions = [
   {
     headline: "You're the one everyone relies on. Who do you rely on?",
-    subhead:
-      "Private therapy for founders, executives, attorneys, finance professionals and physicians who look highly functional from the outside and are quietly burning out.",
+    subhead: heroSubhead,
   },
   {
     headline: "Successful on paper. Overwhelmed in private.",
-    subhead:
-      "Therapy for high-achieving professionals carrying more than anyone can see: the pressure, the strained relationships, and the habits that have stopped working.",
+    subhead: heroSubhead,
   },
   {
     headline: "You can handle everything. That's part of the problem.",
-    subhead:
-      "Private therapy for leaders and professionals who overfunction at work, struggle to say no, and have nowhere to put it all down.",
+    subhead: heroSubhead,
   },
 ];
 
@@ -116,7 +117,7 @@ export const recognition = {
 export const who = {
   eyebrow: "Who I work with",
   heading: "Your title doesn't decide whether this fits.",
-  body: "Attorneys, finance professionals and physicians carry the same weight as leaders and founders: long hours, high stakes and a role you can't set down at the end of the day. The patterns are the same, and so is the cost.",
+  body: "Much like leaders and founders, attorneys, finance professionals and physicians carry the same weight: long hours, high stakes and a role you can't set down at the end of the day. The patterns are the same, and so is the cost.",
   groups: [
     "Founders, business owners and executives",
     "Attorneys and law firm partners",
@@ -159,7 +160,7 @@ export const method = {
   heading: "How I think about this.",
   body: [
     "I work from a family systems perspective: the idea that none of us is who we are in isolation. Your marriage, your family, your organization and the role you play in each of them are one connected system, and change in one part moves the others.",
-    "I'm direct, and I'm kind about it. My East Coast candor and Midwest tact tend to land well with people who are tired of being handled. You won't get a framework or a worksheet. You'll get a real conversation, tailored to you.",
+    "My approach blends the candor of my East Coast roots with the respect and tact of my Midwest influence. My style is direct but kind and tends to land well with people who are tired of being handled. You won't get a framework or a worksheet. You'll get a real conversation, tailored to you.",
     "The goal isn't to make life easier. It's to change your relationship with the pressure, so that you respond to it instead of just absorbing it.",
   ],
   influences: [
@@ -185,7 +186,7 @@ export const how = {
     {
       title: "A free 20-minute introductory call",
       text: byMode(
-        `Send a short note and Karen will reply within ${replyWindow} to set up a time. We talk about what's going on, what you want to change, and whether working together makes sense. No pressure, no pitch.`,
+        `Send a short note and I will reply within ${replyWindow} to set up a time. We talk about what's going on, what you want to change, and whether working together makes sense. No pressure, no pitch.`,
         "We talk about what's going on, what you want to change, and whether working together makes sense. No pressure, no pitch.",
       ),
     },
@@ -204,7 +205,7 @@ export const about = {
   eyebrow: "About Karen",
   heading: "Twenty years of family systems work, five of them inside the business world.",
   body: [
-    "I'm a licensed marriage and family therapist. For twenty years I've helped people change the patterns that shape their relationships and their lives. For five of those years I worked inside companies, coaching founders and CEOs and leading leadership development programs.",
+    "I'm a licensed marriage and family therapist currently living in Washington DC. For twenty years I've helped people change the patterns that shape their relationships and their lives. For five of those years I worked inside companies, coaching founders and CEOs and leading leadership development programs.",
     "Many of those engagements came from family-owned businesses, where leadership brought me in because their business challenges were really about family dynamics: succession, sibling rivalry, unspoken loyalties and old roles playing out in the boardroom.",
     "I've also sat in the owner's seat. I co-owned a business advisory consultancy and brought products to market, so I know what it means to have your name on the line.",
     "I understand the isolation of being the one everyone depends on, the pressure that follows people home, and the way success can quietly cost a marriage, a family or a sense of self. So I chose to focus entirely on therapy, because that's where lasting change happens.",
@@ -235,8 +236,12 @@ export const faq = {
       a: "Yes. I work with attorneys, physicians, finance professionals, business owners and other high achievers whose roles carry the same pressure.",
     },
     {
+      q: "Does it matter where I live?",
+      a: "Yes. Currently I am only licensed to work with clients who reside in Virginia or New York.",
+    },
+    {
       q: "Where do you see clients?",
-      a: "By secure, private telehealth, for clients located in Virginia or New York at the time of the session.",
+      a: "I see clients via a secure telehealth portal who are residents of Virginia and New York.",
     },
     {
       q: "Is what we discuss confidential?",
@@ -249,8 +254,8 @@ export const faq = {
     {
       q: "What happens after I reach out?",
       a: byMode(
-        `Karen reads your note herself and replies within ${replyWindow}. If it looks like a good fit, she'll send a link to book a free 20-minute introductory call.`,
-        "You pick a time on Karen's calendar for a free 20-minute introductory call. It's a chance to talk about what's going on and whether working together makes sense.",
+        `I read your note myself and reply within ${replyWindow}. If it looks like a good fit, I'll send a link to book a free 20-minute introductory call.`,
+        "You pick a time on my calendar for a free 20-minute introductory call. It's a chance to talk about what's going on and whether working together makes sense.",
       ),
     },
     {
@@ -271,11 +276,11 @@ export const footer = {
   // Each license links to that state's public verification tool.
   licenses: [
     {
-      label: "Virginia LMFT license 0717002740",
+      label: "Virginia LMFT #0717002740",
       verifyHref: "https://dhp.virginiainteractive.org/lookup/index",
     },
     {
-      label: "New York LMFT license 001354",
+      label: "New York LMFT #001354",
       verifyHref: "https://eservices.nysed.gov/professions/verification-search",
     },
   ],
@@ -296,7 +301,7 @@ export const contact = {
     "Send Karen Knab a short note to request a free introductory call. She replies personally within two business days.",
   eyebrow: "Let's talk",
   heading: "Request a free introductory call",
-  intro: `Tell Karen a little about what brings you here. She reads every note herself and will reply within ${replyWindow} to set up a free 20-minute conversation. No pressure, no pitch.`,
+  intro: `Tell me a little about what brings you here. I read every note myself and will reply within ${replyWindow} to set up a free 20-minute conversation. No pressure, no pitch.`,
   privacyNote:
     "Please keep your note brief and leave out medical or other personal details. This form is not a secure place for clinical information. Your name and email are used only so Karen can reply.",
   privacyLinkLabel: "How your information is handled",
@@ -309,10 +314,10 @@ export const contact = {
       error: "Please add a short note (at least a few words).",
     },
   },
-  submit: "Send to Karen",
+  submit: "Send",
   sending: "Sending...",
   successHeading: "Thank you. Your note is on its way.",
-  successBody: `Karen will reply within ${replyWindow}. If you don't see a message from her, check your spam folder.`,
+  successBody: `I will reply within ${replyWindow}. If you don't see a message from me, check your spam folder.`,
   errorGeneric: `Something went wrong and your note didn't go through. Please try again, or email ${site.email} directly.`,
   errorTooFast: "That was quick. Please take a moment and try sending again.",
   errorRateLimit: `Too many attempts. Please try again later, or email ${site.email} directly.`,

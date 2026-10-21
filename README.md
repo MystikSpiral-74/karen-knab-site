@@ -60,7 +60,7 @@ Push to GitHub (Vercel deploys automatically), then attach karenknab.com. `NEXT_
 ## Photos
 Cropped 4:5 from the 2023 bench shoot (originals 2576px wide) into `public/images/`:
 - `karen-hero.jpg`: hands clasped, eye contact (hero)
-- `karen-about.jpg`: candid, looking off to the side (About)
-- `karen-rail.jpg`: stair-railing portrait, cropped and ready but NOT placed. The saturated orange/yellow background clashes with the petrol/forest/taupe palette. Try it in About (swap the `src` in `page.tsx`) and let Karen react.
+- `karen-about.jpg`: candid, looking off to the side (not currently used; the About section now uses karen-rail.jpg)
+- `karen-rail.jpg`: railing portrait, used in the About section.
 - Not used: workshop candid (shows other attendees who have not consented, and low quality) and the 400px black and white headshot (too small for web hero; fine for directory profiles).
 - To change a crop, edit the source in `page.tsx` or re-export a 4:5 JPEG at 1200x1500 or larger.
