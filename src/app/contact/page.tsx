@@ -8,6 +8,8 @@ import { ContactForm } from "@/components/ContactForm";
 export const metadata: Metadata = {
   title: contact.metaTitle,
   description: contact.metaDescription,
+  // Dormant page: reachable by address, hidden from search engines.
+  robots: { index: false, follow: false },
   alternates: { canonical: "/contact" },
 };
 

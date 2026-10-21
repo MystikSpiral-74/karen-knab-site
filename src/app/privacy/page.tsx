@@ -6,6 +6,8 @@ import { Footer } from "@/components/Footer";
 export const metadata: Metadata = {
   title: privacy.metaTitle,
   description: privacy.metaDescription,
+  // Dormant page: reachable by address, hidden from search engines.
+  robots: { index: false, follow: false },
   alternates: { canonical: "/privacy" },
 };
 

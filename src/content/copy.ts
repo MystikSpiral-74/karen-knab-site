@@ -15,11 +15,12 @@ function urlFromEnv(value: string | undefined, fallback: string): string {
 }
 
 // How the "request a call" buttons work.
-//   "form"     sends visitors to the /contact page (the default).
-//   "calendly" goes straight to Karen's Calendly page, as the site did before.
-// Set NEXT_PUBLIC_BOOKING_MODE=calendly in Vercel and redeploy to switch back.
+//   "calendly" goes straight to Karen's Calendly page (the default).
+//   "form"     sends visitors to the /contact page instead, and shows the Contact and Privacy links.
+// Set NEXT_PUBLIC_BOOKING_MODE=form in Vercel and redeploy to switch to the form.
+// The /contact and /privacy pages always exist but are hidden from search and, in Calendly mode, unlinked.
 const bookingMode: "form" | "calendly" =
-  process.env.NEXT_PUBLIC_BOOKING_MODE === "calendly" ? "calendly" : "form";
+  process.env.NEXT_PUBLIC_BOOKING_MODE === "form" ? "form" : "calendly";
 const byMode = <T>(form: T, calendly: T): T => (bookingMode === "calendly" ? calendly : form);
 
 // Karen's free 20-minute introductory call. NEXT_PUBLIC_CALENDLY_URL in Vercel overrides it.
@@ -53,6 +54,7 @@ export const site = {
   // Where every "request a call" button points, and whether it leaves the site.
   ctaHref: bookingMode === "calendly" ? bookingUrl : "/contact",
   ctaExternal: bookingMode === "calendly",
+  psychologyTodayUrl: "https://www.psychologytoday.com/profile/1250829",
   linkedinUrl: "https://www.linkedin.com/in/karen-knab",
   // Draft sites stay hidden from search engines. Set NEXT_PUBLIC_ALLOW_INDEXING=true at launch.
   allowIndexing: process.env.NEXT_PUBLIC_ALLOW_INDEXING === "true",
@@ -114,7 +116,7 @@ export const recognition = {
 export const who = {
   eyebrow: "Who I work with",
   heading: "Your title doesn't decide whether this fits.",
-  body: "Attorneys, finance professionals and physicians carry the same weight as executives: long hours, high stakes and a role you can't set down at the end of the day. The patterns are the same, and so is the cost.",
+  body: "Much like leaders and founders, attorneys, finance professionals and physicians carry the same weight: long hours, high stakes and a role you can't set down at the end of the day. The patterns are the same, and so is the cost.",
   groups: [
     "Founders, business owners and executives",
     "Attorneys and law firm partners",
@@ -203,7 +205,7 @@ export const about = {
   heading: "Twenty years of family systems work, five of them inside the business world.",
   body: [
     "I'm a licensed marriage and family therapist. For twenty years I've helped people change the patterns that shape their relationships and their lives. For five of those years I worked inside companies, coaching founders and CEOs and leading leadership development programs.",
-    "Many of those engagements came from family-owned businesses, where leadership brought me in because their business challenges were really family dynamics: succession, sibling rivalry, unspoken loyalties and old roles playing out in the boardroom.",
+    "Many of those engagements came from family-owned businesses, where leadership brought me in because their business challenges were really about family dynamics: succession, sibling rivalry, unspoken loyalties and old roles playing out in the boardroom.",
     "I've also sat in the owner's seat. I co-owned a business advisory consultancy and brought products to market, so I know what it means to have your name on the line.",
     "I understand the isolation of being the one everyone depends on, the pressure that follows people home, and the way success can quietly cost a marriage, a family or a sense of self. So I chose to focus entirely on therapy, because that's where lasting change happens.",
   ],
@@ -221,15 +223,16 @@ export const faq = {
   heading: "Before you reach out.",
   items: [
     {
-      q: "What happens after I reach out?",
-      a: byMode(
-        `Karen reads your note herself and replies within ${replyWindow}. If it looks like a good fit, she'll send a link to book a free 20-minute introductory call.`,
-        "You pick a time on Karen's calendar for a free 20-minute introductory call. It's a chance to talk about what's going on and whether working together makes sense.",
-      ),
-    },
-    {
       q: "Is this therapy or coaching?",
       a: "It's therapy. My coaching background informs how I understand your world, but the work we do together is psychotherapy.",
+    },
+    {
+      q: "I'm not sure I need therapy. Is that okay?",
+      a: "Very common. Most people who reach out are functioning well on the surface and aren't sure it's \"bad enough.\" The introductory call is a low-pressure way to find out whether this is the right fit.",
+    },
+    {
+      q: "I don't hold a C-suite title. Is this still for me?",
+      a: "Yes. I work with attorneys, physicians, finance professionals, business owners and other high achievers whose roles carry the same pressure.",
     },
     {
       q: "Where do you see clients?",
@@ -241,15 +244,18 @@ export const faq = {
     },
     {
       q: "Do you take insurance?",
-      a: "My practice is private-pay. If you have questions about fees or how this fits your situation, we can talk about it on the introductory call.",
+      a: "No. All sessions are to be paid for at the time of service. Sessions can be paid for by debit/credit card or with an HSA/flex spending account. You may be eligible for reimbursement for sessions depending on your out-of-network mental health benefits. If you choose to submit for reimbursement, I can provide you with a \u201csuperbill\u201d for services at any point. However, I do not submit anything on your behalf.",
     },
     {
-      q: "I'm not sure I need therapy. Is that okay?",
-      a: "Very common. Most people who reach out are functioning well on the surface and aren't sure it's \"bad enough.\" The introductory call is a low-pressure way to find out whether this is the right fit.",
+      q: "What happens after I reach out?",
+      a: byMode(
+        `Karen reads your note herself and replies within ${replyWindow}. If it looks like a good fit, she'll send a link to book a free 20-minute introductory call.`,
+        "You pick a time on Karen's calendar for a free 20-minute introductory call. It's a chance to talk about what's going on and whether working together makes sense.",
+      ),
     },
     {
-      q: "I don't hold a C-suite title. Is this still for me?",
-      a: "Yes. I work with attorneys, physicians, finance professionals, business owners and other high achievers whose roles carry the same pressure.",
+      q: "How much do sessions cost?",
+      a: "Sessions are 60 minutes and the price is $250/session.",
     },
   ],
 };
@@ -273,15 +279,15 @@ export const footer = {
       verifyHref: "https://eservices.nysed.gov/professions/verification-search",
     },
   ],
-  verifyLabel: "Verify",
   crisis: byMode(
     "If you are in crisis or need immediate help, call or text 988, or go to your nearest emergency room. Requesting an introductory call is not an emergency service.",
     "If you are in crisis or need immediate help, call or text 988, or go to your nearest emergency room. Scheduling an introductory call is not an emergency service.",
   ),
-  links: [
+  // The contact form and privacy pages are dormant in Calendly mode, so no links to them.
+  links: byMode([
     { label: "Contact", href: "/contact" },
     { label: "Privacy policy", href: "/privacy" },
-  ],
+  ], [] as { label: string; href: string }[]),
 };
 
 export const contact = {

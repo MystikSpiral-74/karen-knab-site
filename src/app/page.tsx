@@ -57,7 +57,7 @@ const jsonLd = {
   description: site.metaDescription,
   url: site.url,
   email: site.email,
-  sameAs: [site.linkedinUrl],
+  sameAs: [site.linkedinUrl, site.psychologyTodayUrl],
   areaServed: [
     { "@type": "AdministrativeArea", name: "Virginia" },
     { "@type": "AdministrativeArea", name: "New York" },
@@ -249,7 +249,23 @@ export default function Home() {
               />
               <ul className="mt-6 space-y-2 border-t border-taupe/50 pt-5 font-serif text-lg text-petrol">
                 {about.facts.map((f) => (
-                  <li key={f}>{f}</li>
+                  <li key={f} className="flex items-start gap-3">
+                    <svg
+                      aria-hidden="true"
+                      focusable="false"
+                      viewBox="0 0 24 24"
+                      className="mt-[0.45rem] h-4 w-4 shrink-0 text-slate"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M4 12h15" />
+                      <path d="M13 6l6 6-6 6" />
+                    </svg>
+                    <span>{f}</span>
+                  </li>
                 ))}
               </ul>
             </div>
