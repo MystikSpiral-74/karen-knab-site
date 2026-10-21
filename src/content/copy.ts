@@ -35,18 +35,12 @@ const replyWindow = "two business days";
 export const site = {
   name: "Karen Knab, LMFT",
   descriptor: "Therapy for Leaders and High-Achieving Professionals",
-  // Address of the live site. Vercel supplies VERCEL_PROJECT_PRODUCTION_URL automatically
-  // (it becomes karenknab.com once that domain is attached), so no manual setup is needed.
-  // NEXT_PUBLIC_SITE_URL still overrides it if ever set.
-  url: urlFromEnv(
-    process.env.NEXT_PUBLIC_SITE_URL,
-    urlFromEnv(
-      process.env.VERCEL_PROJECT_PRODUCTION_URL
-        ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-        : undefined,
-      "https://www.karenknab.com",
-    ),
-  ),
+  // Public address of the live site. Used for the canonical link, social previews, the sitemap and
+  // structured data. Fixed on purpose: Vercel's automatic production URL can be the *.vercel.app
+  // address, which would tell Google the wrong site is the original.
+  // If the main address ever changes (for example to the bare karenknab.com), set
+  // NEXT_PUBLIC_SITE_URL in Vercel and redeploy.
+  url: urlFromEnv(process.env.NEXT_PUBLIC_SITE_URL, "https://www.karenknab.com").replace(/\/+$/, ""),
   email: "karen@karenknab.com",
   bookingMode,
   bookingUrl,
