@@ -47,7 +47,7 @@ npm run build    # static build check
 
 By default every "request a call" button goes to Karen's Calendly page (new tab). A contact form is built but dormant: `/contact` and `/privacy` exist, are hidden from search engines (noindex) and are not linked anywhere.
 
-- To switch the buttons to the form, set `NEXT_PUBLIC_BOOKING_MODE=form` in Vercel and redeploy. That also restores the footer Contact and Privacy links and the form-specific wording.
+- To switch the buttons to the form, set `NEXT_PUBLIC_BOOKING_MODE=form` (lowercase, exactly) in Vercel and redeploy with the build cache off. The value is built into the site, so a redeploy is required. That also restores the footer Contact and Privacy links and the form-specific wording. Any other value falls back to Calendly. Full steps: `docs/contact-form-setup.md`.
 - Transport: a Vercel Server Action posts to a Google Apps Script web app in Karen's Google account, which emails her. Nothing is stored. Script and steps: `docs/contact-form-apps-script.gs` and `docs/contact-form-setup.md`.
 - Vercel env vars for the form: `CONTACT_WEBHOOK_URL` and `CONTACT_WEBHOOK_SECRET` (matches the script's `SHARED_SECRET`). Mark both Sensitive. Without them the form shows an error with Karen's email.
 - Spam defenses: honeypot field, minimum time on page, validation, in-memory rate limits (per IP and global). They reset when the server restarts.

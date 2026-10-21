@@ -13,8 +13,18 @@ The site's server posts each inquiry to a small Google Apps Script in Karen's Go
 1. In Vercel set `CONTACT_WEBHOOK_URL` (the /exec URL) and `CONTACT_WEBHOOK_SECRET` (same as SHARED_SECRET), then redeploy.
 2. Submit a live test on /contact and confirm it reaches Karen.
 
-## Switching back to Calendly
-Set `NEXT_PUBLIC_BOOKING_MODE=calendly` in Vercel and redeploy. Remove it to return to the form.
+## Turning the contact form on (and back off)
+The site defaults to Calendly: every "request a call" button opens Karen's Calendly page. The contact form exists but is dormant (`/contact` and `/privacy` are hidden from search and not linked).
+
+To switch the buttons to the form:
+1. Make sure Karen's script is deployed and `CONTACT_WEBHOOK_URL` and `CONTACT_WEBHOOK_SECRET` in Vercel point at it (not a practice deployment). Do one live test first.
+2. In Vercel, add `NEXT_PUBLIC_BOOKING_MODE` with the value `form` (lowercase, exactly).
+3. Redeploy. This value is built into the site, so changing it does nothing until a new deployment. In Vercel go to Deployments, open the latest one's menu, choose Redeploy, and turn off "use existing build cache".
+4. Check the buttons go to `/contact`, the footer shows Contact and Privacy links, and submit one test message.
+
+To go back to Calendly: delete the variable (or set it to anything other than `form`) and redeploy. Any other value, a blank or a typo falls back to Calendly on purpose.
+
+Before turning the form on for visitors, Karen should review `/privacy`.
 
 ## Review before launch
 Karen should review /privacy for her state boards and HIPAA status, and confirm the "two business days" promise and how long she keeps inquiry emails.
