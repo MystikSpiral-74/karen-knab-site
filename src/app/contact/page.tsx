@@ -1,6 +1,7 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { contact } from "@/content/copy";
+import { contact, site } from "@/content/copy";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ContactForm } from "@/components/ContactForm";
@@ -14,6 +15,8 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
+  // Dormant unless NEXT_PUBLIC_BOOKING_MODE=form. Bots found the form while it was unused.
+  if (site.bookingMode !== "form") notFound();
   return (
     <>
       <Header showCta={false} />

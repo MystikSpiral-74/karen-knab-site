@@ -1,7 +1,7 @@
 "use server";
 
 import { headers } from "next/headers";
-import { contact } from "@/content/copy";
+import { contact, site } from "@/content/copy";
 import type { ContactState, ContactValues } from "@/lib/contactTypes";
 import { allow } from "@/lib/rateLimit";
 import { sendInquiry } from "@/lib/inquiry";
@@ -10,6 +10,12 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const CONTROL = /[\u0000-\u001f\u007f]/g;
 
 export async function sendContact(_prev: ContactState, formData: FormData): Promise<ContactState> {
+  // The form is dormant unless booking mode is "form". Refuse before reading or sending anything,
+  // so a bot that finds this handler directly cannot trigger an email.
+  if (site.bookingMode !== "form") {
+    return { status: "error", message: contact.errorGeneric, values: { name: "", email: "", reason: "" } };
+  }
+
   const str = (k: string) => (typeof formData.get(k) === "string" ? (formData.get(k) as string) : "");
 
   // Honeypot: real visitors never see this field. Pretend it worked.

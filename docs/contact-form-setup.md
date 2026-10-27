@@ -14,7 +14,7 @@ The site's server posts each inquiry to a small Google Apps Script in Karen's Go
 2. Submit a live test on /contact and confirm it reaches Karen.
 
 ## Turning the contact form on (and back off)
-The site defaults to Calendly: every "request a call" button opens Karen's Calendly page. The contact form exists but is dormant (`/contact` and `/privacy` are hidden from search and not linked).
+The site defaults to Calendly: every "request a call" button opens Karen's Calendly page. The contact form exists but is dormant: in Calendly mode `/contact` and `/privacy` return a not-found page and the form handler refuses to send anything.
 
 To switch the buttons to the form:
 1. Make sure Karen's script is deployed and `CONTACT_WEBHOOK_URL` and `CONTACT_WEBHOOK_SECRET` in Vercel point at it (not a practice deployment). Do one live test first.

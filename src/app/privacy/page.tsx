@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { privacy } from "@/content/copy";
+import { notFound } from "next/navigation";
+import { privacy, site } from "@/content/copy";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
@@ -12,6 +13,8 @@ export const metadata: Metadata = {
 };
 
 export default function PrivacyPage() {
+  // This policy describes the contact form, so it is dormant together with it.
+  if (site.bookingMode !== "form") notFound();
   return (
     <>
       <Header />
