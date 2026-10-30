@@ -60,6 +60,7 @@ const jsonLd = {
   sameAs: [site.linkedinUrl, site.psychologyTodayUrl],
   areaServed: [
     { "@type": "AdministrativeArea", name: "Virginia" },
+    { "@type": "AdministrativeArea", name: "Minnesota" },
     { "@type": "AdministrativeArea", name: "New York" },
   ],
 };

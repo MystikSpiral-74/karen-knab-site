@@ -57,7 +57,7 @@ export const site = {
   headerCtaLabel: "Let's talk",
   ctaNote: "Free, 20 minutes. No pressure, no pitch.",
   metaDescription:
-    "Private therapy for founders, executives, attorneys, finance professionals and physicians who look highly functional from the outside and are privately burning out. Secure telehealth in Virginia and New York.",
+    "Private therapy for founders, executives, attorneys, finance professionals and physicians who look highly functional from the outside and are privately burning out. Secure telehealth in Virginia, New York, and Minnesota.",
 };
 
 // Hero headline options. With no ?h= in the URL the page shows option 3 (defaultHeroIndex).
@@ -209,7 +209,7 @@ export const about = {
     "20 years of clinical experience",
     "5 years coaching founders and CEOs",
     "Has worked with leaders and organizations in Virginia/Washington DC, Los Angeles, Austin, Minneapolis, and Buffalo NY",
-    "Secure telehealth in Virginia and New York",
+    "Secure telehealth in Virginia, New York, and Minnesota",
   ],
 };
 
@@ -231,11 +231,11 @@ export const faq = {
     },
     {
       q: "Does it matter where I live?",
-      a: "Yes. Currently I am only licensed to work with clients who reside in Virginia or New York.",
+      a: "Yes. Currently I am only licensed to work with clients who reside in Virginia, New York, or Minnesota.",
     },
     {
       q: "Where do you see clients?",
-      a: "I see clients via a secure telehealth portal who are residents of Virginia and New York.",
+      a: "I see clients via a secure telehealth portal who are residents of Virginia, New York, and Minnesota.",
     },
     {
       q: "Is what we discuss confidential?",
@@ -266,7 +266,7 @@ export const closing = {
 };
 
 export const footer = {
-  licensure: "Karen Knab, LMFT. Licensed in Virginia and New York.",
+  licensure: "Karen Knab, LMFT. Licensed in Virginia, New York, and Minnesota.",
   // Each license links to that state's public verification tool.
   licenses: [
     {
@@ -276,6 +276,10 @@ export const footer = {
     {
       label: "New York LMFT #001354",
       verifyHref: "https://eservices.nysed.gov/professions/verification-search",
+    },
+    {
+      label: "Minnesota LMFT #4571",
+      verifyHref: "https://mft.hlb.state.mn.us/#/services/onlineLicenseSearch",
     },
   ],
   crisis: byMode(
